@@ -1,0 +1,12 @@
+# Model weights are RELEASE ASSETS, not repository files.
+#
+# GitHub rejects any file over 100 MB on push, and gfpgan-v1.4-512-fp16.onnx is 170 MB — so a
+# commit containing it does not merely bloat the history, it fails outright. Attaching them to a
+# release instead keeps the repo small, gives every file a stable download URL, and lets a model be
+# replaced without touching git history.
+*.onnx
+*.pth
+*.bin
+
+# Staged here purely so the five files are in one folder to drag into the GitHub release UI.
+release-assets/

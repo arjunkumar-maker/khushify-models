@@ -1,0 +1,47 @@
+[
+  {
+    "id": "face-restore",
+    "title": "Face Restoration",
+    "description": "Rebuilds facial detail from a learned prior. For old, blurry or low-resolution faces.",
+    "file": "gfpgan-v1.4-512-fp16.onnx",
+    "assetPath": "face/gfpgan-v1.4-512-fp16.onnx",
+    "bytes": 169806381,
+    "sha256": "68e8c5e1c62b20cb3efe15c53f6b8dbe946f20166966aca19403e719711cd249"
+  },
+  {
+    "id": "super-resolution-256",
+    "title": "HD Upscale (256)",
+    "description": "Super-resolution. Bundled for experiment only - too slow to enable by default.",
+    "file": "realesr-general-x4v3-256.onnx",
+    "assetPath": "sr/realesr-general-x4v3-256.onnx",
+    "bytes": 4866393,
+    "sha256": "0f2fcd5aa54ceb1fcb682ebcbda10a5cb36111c4c6b777347decf16b77d9e8dd"
+  },
+  {
+    "id": "super-resolution-384",
+    "title": "HD Upscale (384)",
+    "description": "",
+    "file": "realesr-general-x4v3-384.onnx",
+    "assetPath": "sr/realesr-general-x4v3-384.onnx",
+    "bytes": 4866393,
+    "sha256": "c18a2bfc9a252ec60761953edf660b7f9cd8a8215d0dbcdb005a1603494ecb23"
+  },
+  {
+    "id": "super-resolution-512",
+    "title": "HD Upscale (512)",
+    "description": "",
+    "file": "realesr-general-x4v3-512.onnx",
+    "assetPath": "sr/realesr-general-x4v3-512.onnx",
+    "bytes": 4866393,
+    "sha256": "dbd743f8579f18134e0c5d96806c9927415284a80e4e03b4333b2345e0f0b643"
+  },
+  {
+    "id": "colourise",
+    "title": "Colourisation",
+    "description": "Adds colour to a black-and-white photograph. Only offered for photos the analyser found to be monochrome.",
+    "file": "eccv16-256-fp16.onnx",
+    "assetPath": "models/colorize/eccv16-256-fp16.onnx",
+    "bytes": 64566480,
+    "sha256": "2eba00e31a56cef6df325521743a3e182280045742786dc06b252f61a8bc7236"
+  }
+]
