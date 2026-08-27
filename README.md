@@ -42,8 +42,11 @@ Once downloaded, inference is entirely offline.
 
 | Tag | Contents |
 |---|---|
-| `models-v1` | Initial packs — face restoration, colourisation, super-resolution |
-| `models-v2` | Adds Damage Reconstruction (LaMa) for torn and cracked photographs |
+| `models-v1` | Face restoration, colourisation, super-resolution, and Damage Reconstruction |
+
+A pack added to an EXISTING tag needs no app change at all beyond the regenerated
+catalogue: the download URL is `<tag>/<file>`, so a new file under a tag the app
+already points at is reachable the moment it finishes uploading.
 
 Publishing a new tag does **not** require an app update, as long as `catalog.json` in the app is
 regenerated to match.

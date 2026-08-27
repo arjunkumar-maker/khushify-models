@@ -24,7 +24,8 @@ unzip big-lama.zip
 
 pip install torch onnx onnxruntime numpy pyyaml omegaconf
 
-PYTHONPATH=. python ../khushify/tools/convert/export_lama.py \
+# the shim keeps pytorch_lightning out of it; see the script header
+PYTHONPATH="<shim>;." python ../khushify/tools/convert/export_lama.py \
     --checkpoint big-lama/models/best.ckpt \
     --config     big-lama/config.yaml \
     --out        lama-fp32-512.onnx
@@ -70,19 +71,39 @@ network problem and is not.
 
 ---
 
-## 4. Publish the release
+## 4. Publish
+
+There are two shapes this can take, and the cheap one is usually right.
+
+### 4a. Add the file to the EXISTING release (preferred)
+
+If a release already carries the other packs and the app already points at that tag, adding one
+asset to it is the whole job. No new tag, no repointing, no re-uploading the packs that have not
+changed, and no window in which some files resolve and others 404.
+
+GitHub does not need the CLI for this:
+
+1. https://github.com/arjunkumar-maker/khushify-models/releases
+2. Next to the existing tag, **Edit release** (the pencil).
+3. Drag the new `.onnx` from `release-assets/` onto **Attach binaries**.
+4. Wait for the upload bar to reach 100% and the filename to appear in the asset list. A large
+   asset can appear in the list before it has finished; the release is not safe to use until the
+   progress bar is gone.
+5. **Update release**.
+
+Then confirm it is actually reachable, because a partially-uploaded asset still shows in the list:
 
 ```bash
-cd ../modals/khushify-models
-git add catalog.json README.md LICENSE-MODELS.md PUBLISHING.md
-git commit -m "Add Damage Reconstruction pack (LaMa)"
-git push
-
-gh release create models-v2 \
-    release-assets/*.onnx \
-    --title "Model packs v2" \
-    --notes "Adds Damage Reconstruction (LaMa). Re-uploads the v1 packs so one tag serves them all."
+curl -sIL \
+  https://github.com/arjunkumar-maker/khushify-models/releases/download/<tag>/<file> \
+  | grep -iE "^HTTP|content-length"
 ```
+
+Expect a final `HTTP/2 200` and a `content-length` matching the local file exactly.
+
+### 4b. Cut a new tag
+
+Only worth it when the packs themselves change, or when you want the tag to pin a known-good set.
 
 **Attach every pack to the new tag, not only the new one.** The app builds one URL per file from a
 single host property:
@@ -91,12 +112,24 @@ single host property:
 <khushifyModelHost>/<file>
 ```
 
-so all files must live under the same tag. Attaching only the new pack to `models-v2` leaves the
-other four resolving to 404 the moment the host is repointed.
+so all files must live under the same tag. Attaching only the new pack leaves the others resolving
+to 404 the moment the host is repointed.
+
+```bash
+gh release create models-v2 release-assets/*.onnx \
+    --title "Model packs v2" \
+    --notes "Adds Damage Reconstruction (LaMa). Re-uploads the v1 packs so one tag serves them all."
+```
+
+`gh` is not installed by default. Either `winget install GitHub.cli`, or use the web UI: **Releases
+-> Draft a new release**, type the tag, drag in all the `.onnx` files.
 
 ---
 
 ## 5. Point the app at the tag
+
+Only needed if you cut a NEW tag in 4b. If you added to the existing release, the host already
+points at the right place and nothing changes.
 
 `android/gradle.properties`:
 
@@ -132,7 +165,8 @@ appear as ready.
 - [ ] ONNX exported, `onnx.checker` clean
 - [ ] File copied into `release-assets/`
 - [ ] `update_catalog.py --write` run, both catalogues updated
-- [ ] Release created with **all** packs attached
-- [ ] `khushifyModelHost` points at the new tag
+- [ ] Asset attached to the release, upload bar finished
+- [ ] `curl -sIL <url>` returns 200 with a matching content-length
+- [ ] If a NEW tag: **all** packs attached, and `khushifyModelHost` repointed
 - [ ] Clean release build
 - [ ] Download verified on a device
