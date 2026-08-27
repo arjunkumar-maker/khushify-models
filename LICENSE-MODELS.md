@@ -54,6 +54,38 @@ recorded here so it is made deliberately rather than by default.
 
 ---
 
+## LaMa (big-lama) — Apache 2.0 CODE, NON-COMMERCIAL WEIGHTS
+
+`lama-fp32-512.onnx`
+
+© Samsung Research. From [lama](https://github.com/advimman/lama), Suvorov et al., WACV 2022.
+
+> Damage reconstruction by LaMa (Suvorov et al., 2022), © Samsung Research
+
+**The code is Apache 2.0. The `big-lama` weights are not.**
+
+This is the same shape of problem as GFPGAN, and it needs the same deliberate decision. The
+repository's LICENSE is Apache 2.0, and that covers the architecture and the training code. The
+published `big-lama` checkpoint is released separately, under terms restricting it to
+non-commercial research use.
+
+So the position is:
+
+* shipping the **architecture**, retrained on data you hold rights to — unrestricted;
+* shipping the **published big-lama checkpoint** in a paid product — not covered by Apache 2.0, and
+  the restriction lands on the artefact this pack actually contains.
+
+Checked against the upstream repository on 2026-08-27. As with GFPGAN, the widely-repeated summary
+"LaMa is Apache 2.0" describes the code and omits the weights.
+
+**This is a commercial and legal decision for the project owner, not an engineering one.** It is
+recorded here so it is made deliberately rather than by default. If Khushify is or becomes a paid
+product the options are to retrain the architecture, to license the checkpoint, or to leave this
+pack out — and the app already handles the last one correctly, because a pack absent from the
+catalogue is never offered.
+
+---
+
 ## Conversion
 
 All files were converted from their published checkpoints by the scripts in the app repository

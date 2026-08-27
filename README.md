@@ -16,6 +16,7 @@ weights at all.
 | `realesr-general-x4v3-384.onnx` | 5 MB | HD Upscale (384) |
 | `realesr-general-x4v3-512.onnx` | 5 MB | HD Upscale (512) |
 | `eccv16-256-fp16.onnx` | 65 MB | Colourisation |
+| `lama-fp32-512.onnx` | ~200 MB | Damage Reconstruction |
 
 **The weights are not in this repository.** They are attached to releases. GitHub rejects any file
 over 100 MB on push, and the face restorer is 170 MB, so committing them would fail rather than
@@ -42,9 +43,26 @@ Once downloaded, inference is entirely offline.
 | Tag | Contents |
 |---|---|
 | `models-v1` | Initial packs — face restoration, colourisation, super-resolution |
+| `models-v2` | Adds Damage Reconstruction (LaMa) for torn and cracked photographs |
 
 Publishing a new tag does **not** require an app update, as long as `catalog.json` in the app is
 regenerated to match.
+
+`catalog.json` in this repository and the one inside the APK are both **generated**, never edited by
+hand:
+
+```
+python tools/update_catalog.py --write     # from the app repository
+```
+
+It measures `bytes` and `sha256` from the files in `release-assets/` and writes both copies from one
+definition. They had already drifted once when they were maintained by hand — four packs here used
+bare asset paths while a fifth used a `models/`-prefixed one — and a wrong hash does not fail
+loudly: the app deletes the download and reports it as corrupt, which reads as a network problem.
+
+A pack listed in the generator with no file in `release-assets/` is simply omitted from both
+catalogues, so the app never offers it. That is the correct state for a pack that has not been
+exported yet.
 
 ## Licences
 
