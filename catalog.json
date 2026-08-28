@@ -14,8 +14,8 @@
     "description": "Rebuilds torn, cracked and missing areas of an old photograph.",
     "file": "lama-fp32-512.onnx",
     "assetPath": "inpaint/lama-fp32-512.onnx",
-    "bytes": 209417080,
-    "sha256": "cf5329490c9440fe4583658e5bc9e402419672468f4afbc430f58bc0b2894be2"
+    "bytes": 209418796,
+    "sha256": "c958f3885d4880180ddb81a36d92378e8bcd611572a314345e4afcb69bc7a26a"
   },
   {
     "id": "super-resolution-256",
