@@ -32,7 +32,7 @@
   {
     "id": "super-resolution-256",
     "title": "HD Upscale (256)",
-    "description": "Super-resolution. Bundled for experiment only - too slow to enable by default.",
+    "description": "Tile-based full-image detail recovery with 2x output and guarded 4x for small photos.",
     "file": "realesr-general-x4v3-256.onnx",
     "assetPath": "sr/realesr-general-x4v3-256.onnx",
     "bytes": 4866393,
