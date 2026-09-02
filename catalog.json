@@ -6,7 +6,13 @@
     "file": "gfpgan-v1.4-512-fp16.onnx",
     "assetPath": "face/gfpgan-v1.4-512-fp16.onnx",
     "bytes": 169806381,
-    "sha256": "68e8c5e1c62b20cb3efe15c53f6b8dbe946f20166966aca19403e719711cd249"
+    "sha256": "68e8c5e1c62b20cb3efe15c53f6b8dbe946f20166966aca19403e719711cd249",
+    "version": "1.4-fp16",
+    "purpose": "Identity-aware face restoration",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 3072,
+    "storageBytes": 339612762,
+    "optional": true
   },
   {
     "id": "inpaint",
@@ -15,7 +21,13 @@
     "file": "lama-fp32-512.onnx",
     "assetPath": "inpaint/lama-fp32-512.onnx",
     "bytes": 209418796,
-    "sha256": "c958f3885d4880180ddb81a36d92378e8bcd611572a314345e4afcb69bc7a26a"
+    "sha256": "c958f3885d4880180ddb81a36d92378e8bcd611572a314345e4afcb69bc7a26a",
+    "version": "big-lama-fp32",
+    "purpose": "Reconstruct scratches, tears, and missing regions",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 4096,
+    "storageBytes": 418837592,
+    "optional": true
   },
   {
     "id": "super-resolution-256",
@@ -24,7 +36,13 @@
     "file": "realesr-general-x4v3-256.onnx",
     "assetPath": "sr/realesr-general-x4v3-256.onnx",
     "bytes": 4866393,
-    "sha256": "0f2fcd5aa54ceb1fcb682ebcbda10a5cb36111c4c6b777347decf16b77d9e8dd"
+    "sha256": "0f2fcd5aa54ceb1fcb682ebcbda10a5cb36111c4c6b777347decf16b77d9e8dd",
+    "version": "general-x4v3-256",
+    "purpose": "Tiled full-image restoration and 4x super-resolution",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 2048,
+    "storageBytes": 9732786,
+    "optional": true
   },
   {
     "id": "super-resolution-384",
@@ -33,7 +51,13 @@
     "file": "realesr-general-x4v3-384.onnx",
     "assetPath": "sr/realesr-general-x4v3-384.onnx",
     "bytes": 4866393,
-    "sha256": "c18a2bfc9a252ec60761953edf660b7f9cd8a8215d0dbcdb005a1603494ecb23"
+    "sha256": "c18a2bfc9a252ec60761953edf660b7f9cd8a8215d0dbcdb005a1603494ecb23",
+    "version": "general-x4v3-384",
+    "purpose": "Larger tiles for balanced devices",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 3072,
+    "storageBytes": 9732786,
+    "optional": true
   },
   {
     "id": "super-resolution-512",
@@ -42,7 +66,13 @@
     "file": "realesr-general-x4v3-512.onnx",
     "assetPath": "sr/realesr-general-x4v3-512.onnx",
     "bytes": 4866393,
-    "sha256": "dbd743f8579f18134e0c5d96806c9927415284a80e4e03b4333b2345e0f0b643"
+    "sha256": "dbd743f8579f18134e0c5d96806c9927415284a80e4e03b4333b2345e0f0b643",
+    "version": "general-x4v3-512",
+    "purpose": "Larger tiles for high-memory devices",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 4096,
+    "storageBytes": 9732786,
+    "optional": true
   },
   {
     "id": "colourise",
@@ -51,6 +81,12 @@
     "file": "eccv16-256-fp16.onnx",
     "assetPath": "colorize/eccv16-256-fp16.onnx",
     "bytes": 64566480,
-    "sha256": "2eba00e31a56cef6df325521743a3e182280045742786dc06b252f61a8bc7236"
+    "sha256": "2eba00e31a56cef6df325521743a3e182280045742786dc06b252f61a8bc7236",
+    "version": "eccv16-fp16",
+    "purpose": "Natural colourisation of monochrome photographs",
+    "minimumAppVersion": 1,
+    "requiredRamMb": 2048,
+    "storageBytes": 129132960,
+    "optional": true
   }
 ]
