@@ -102,7 +102,10 @@ git commit -m "Add DocsSeva model packs"
 git push
 
 # 2. Create the release and attach all six files
-gh release create docsseva-v1 \
+# ADDED TO THE EXISTING `models-v1` RELEASE, not a new tag. That release
+# already serves another project, and adding alongside it was the lower-risk
+# move in a repository two projects depend on.
+gh release upload models-v1 \
   release-assets/segment-u2netp.onnx \
   release-assets/ocr-det-ppv4.onnx \
   release-assets/ocr-rec-en-ppv4.onnx \
@@ -113,11 +116,11 @@ gh release create docsseva-v1 \
   --notes "OCR and segmentation models for DocsSeva. Apache-2.0 throughout; see LICENSE-MODELS.md."
 ```
 
-**The tag must be exactly `docsseva-v1`.** DocsSeva builds each download URL as
+**The tag must be exactly `models-v1`.** DocsSeva builds each download URL as
 `<base>/<filename>` where the base is
 
 ```
-https://github.com/arjunkumar-maker/khushify-models/releases/download/docsseva-v1
+https://github.com/arjunkumar-maker/khushify-models/releases/download/models-v1
 ```
 
 and that string is compiled into the app. A different tag means every download 404s.
