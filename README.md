@@ -71,3 +71,67 @@ exported yet.
 
 See [LICENSE-MODELS.md](LICENSE-MODELS.md). Every pack here is third-party work under its own terms,
 and attribution is required on redistribution.
+
+---
+
+## DocsSeva packs
+
+This repository also hosts the model files for **DocsSeva**. They sit under their own release tag
+and carry `"app": "docsseva"` in `catalog.json`, so the two apps' packs cannot be confused.
+
+| File | Size | Pack |
+|---|---|---|
+| `segment-u2netp.onnx` | 4.6 MB | Sharper background removal *(optional)* |
+| `ocr-det-ppv4.onnx` | 4.7 MB | Text finder — shared by every language |
+| `ocr-rec-en-ppv4.onnx` | 7.7 MB | English reader |
+| `ocr-rec-en-ppv4.txt` | 192 B | English characters |
+| `ocr-rec-hi-ppv3.onnx` | 9.0 MB | Hindi reader (Devanagari + Latin) |
+| `ocr-rec-hi-ppv3.txt` | 510 B | Hindi characters |
+
+Every one is Apache-2.0 on both code and weights — see `LICENSE-MODELS.md`, which also records the
+one modification made to the two dictionaries and why it was necessary.
+
+### Publishing them
+
+The files are already staged in `release-assets/`. To make them live:
+
+```bash
+# 1. Commit the catalogue and the licences (the .onnx files are gitignored)
+git add catalog.json LICENSE-MODELS.md README.md
+git commit -m "Add DocsSeva model packs"
+git push
+
+# 2. Create the release and attach all six files
+gh release create docsseva-v1 \
+  release-assets/segment-u2netp.onnx \
+  release-assets/ocr-det-ppv4.onnx \
+  release-assets/ocr-rec-en-ppv4.onnx \
+  release-assets/ocr-rec-en-ppv4.txt \
+  release-assets/ocr-rec-hi-ppv3.onnx \
+  release-assets/ocr-rec-hi-ppv3.txt \
+  --title "DocsSeva models v1" \
+  --notes "OCR and segmentation models for DocsSeva. Apache-2.0 throughout; see LICENSE-MODELS.md."
+```
+
+**The tag must be exactly `docsseva-v1`.** DocsSeva builds each download URL as
+`<base>/<filename>` where the base is
+
+```
+https://github.com/arjunkumar-maker/khushify-models/releases/download/docsseva-v1
+```
+
+and that string is compiled into the app. A different tag means every download 404s.
+
+### After publishing
+
+```bash
+cd ../../docsseva_app
+python scripts/fetch-models.py --check      # every SHA-256 still matches
+```
+
+Then, in the app, Settings → Downloads should offer all three packs with a real size and an
+**Install** button instead of "Not available yet".
+
+Nothing needs rebuilding for a file added to an EXISTING tag. Replacing a file does: its SHA-256
+changes, the app will reject the new bytes against the old digest, and
+`src/services/models/registry.ts` has to be updated to match — which is the point of pinning them.
